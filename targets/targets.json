@@ -903,7 +903,7 @@
         "extra_labels": ["STM", "STM32F4", "STM32F439", "STM32F439ZI", "STM32F439xx", "STM32F439xI", "FLASH_CMSIS_ALGO"],
         "supported_toolchains": ["ARM", "uARM", "GCC_ARM", "IAR"],
         "progen": {"target": "nucleo-f439zi"},
-        "macros": ["TRANSACTION_QUEUE_SIZE_SPI=2"],
+        "macros": ["TRANSACTION_QUEUE_SIZE_SPI=2", "MBEDTLS_CONFIG_HW_SUPPORT", "USB_STM_HAL", "USBHOST_OTHER"],
         "device_has": ["ANALOGIN", "ANALOGOUT", "CAN", "ERROR_RED", "I2C", "I2CSLAVE", "I2C_ASYNCH", "INTERRUPTIN", "LOWPOWERTIMER", "PORTIN", "PORTINOUT", "PORTOUT", "PWMOUT", "RTC", "SERIAL", "SERIAL_FC", "SLEEP", "SPI", "SPISLAVE", "SPI_ASYNCH", "STDIO_MESSAGES", "TRNG", "FLASH"],
         "detect_code": ["0797"],
         "features": ["LWIP"],
@@ -2545,7 +2545,63 @@
         "device_has": ["ANALOGIN", "ERROR_PATTERN", "I2C", "I2C_ASYNCH", "INTERRUPTIN", "LOWPOWERTIMER", "PORTIN", "PORTINOUT", "PORTOUT", "PWMOUT", "RTC", "SERIAL", "SERIAL_ASYNCH", "SLEEP", "SPI", "SPI_ASYNCH", "SPISLAVE"],
         "release_versions": ["2", "5"],
         "overrides": {"lf_clock_src": "NRF_LF_SRC_RC"},
+        "config": {
+            "lf_clock_rc_calib_timer_interval": {
+                "value": 16,
+                "macro_name": "MBED_CONF_NORDIC_NRF_LF_CLOCK_CALIB_TIMER_INTERVAL"
+            },
+            "lf_clock_rc_calib_mode_config": {
+                "value": 0,
+                "macro_name": "MBED_CONF_NORDIC_NRF_LF_CLOCK_CALIB_MODE_CONFIG"
+            }
+        },
         "device_name": "nRF52832_xxAA"
+    },
+    "MCU_NRF52840": {
+        "inherits": ["Target"],
+        "core": "Cortex-M4F",
+        "macros": ["TARGET_NRF52840", "BLE_STACK_SUPPORT_REQD", "SOFTDEVICE_PRESENT", "S140", "NRF_SD_BLE_API_VERSION=5", "NRF52840_XXAA", "NRF_DFU_SETTINGS_VERSION=1", "NRF_SD_BLE_API_VERSION=5"],
+        "extra_labels": ["NORDIC", "MCU_NRF52840", "NRF5_SDK13"],
+        "OUTPUT_EXT": "hex",
+        "is_disk_virtual": true,
+        "supported_toolchains": ["GCC_ARM", "ARM", "IAR"],
+        "public": false,
+        "detect_code": ["1101"],
+        "program_cycle_s": 6,
+        "MERGE_SOFT_DEVICE": true,
+        "EXPECTED_SOFTDEVICES_WITH_OFFSETS": [
+            {
+                "boot": "",
+                "name": "s140_nrf52840_5.0.0-1.alpha_softdevice.hex",
+                "offset": 135168
+            }
+        ],
+        "bootloader_select_index": 0,
+        "post_binary_hook": {
+            "function": "MCU_NRF51Code.binary_hook",
+            "toolchains": ["ARM_STD", "GCC_ARM", "IAR"]
+        },
+        "MERGE_BOOTLOADER": false,
+        "features": ["BLE"],
+        "config": {
+            "lf_clock_src": {
+                "value": "NRF_LF_SRC_XTAL",
+                "macro_name": "MBED_CONF_NORDIC_NRF_LF_CLOCK_SRC"
+            },
+            "uart_hwfc": {
+                "help": "Value: 1 for enable, 0 for disable",
+                "value": 1,
+                "macro_name": "MBED_CONF_NORDIC_UART_HWFC"
+            }
+        }
+    },
+    "NRF52840_DK": {
+        "supported_form_factors": ["ARDUINO"],
+        "inherits": ["MCU_NRF52840"],
+        "macros_add": ["BOARD_PCA10056", "CONFIG_GPIO_AS_PINRESET", "SWI_DISABLE0", "NRF52_ERRATA_20"],
+        "device_has": ["ANALOGIN", "ERROR_PATTERN", "I2C", "I2C_ASYNCH", "INTERRUPTIN", "LOWPOWERTIMER", "PORTIN", "PORTINOUT", "PORTOUT", "PWMOUT", "RTC", "SERIAL", "SERIAL_ASYNCH", "SERIAL_FC", "SLEEP", "SPI", "SPI_ASYNCH", "SPISLAVE"],
+        "release_versions": ["2", "5"],
+        "device_name": "nRF52840_xxAA"
     },
     "BLUEPILL_F103C8": {
         "core": "Cortex-M3",
