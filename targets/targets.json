@@ -3012,6 +3012,23 @@
         "default_lib": "small",
         "device_name": "STM32F334K8"
     },
+    "VOXEL_F334_INCL": {
+        "inherits": ["Target"],
+        "core": "Cortex-M4F",
+        "default_toolchain": "GCC_ARM",
+        "extra_labels": ["STM", "STM32F3", "STM32F334x8", "STM32F334K8", "VOXEL_F334_INCL"],
+        "supported_toolchains": ["GCC_ARM"],
+        "public": true,
+        "detect_code": ["0735"],
+        "macros": ["TRANSACTION_QUEUE_SIZE_SPI=2" ],
+        "device_has": ["ANALOGIN", "ANALOGOUT", "CAN", "I2C", "INTERRUPTIN",
+                       "PORTIN", "PORTINOUT", "PORTOUT", "PWMOUT", "RTC",
+                       "SERIAL", "SLEEP", "SPI", "SPISLAVE", "SPI_ASYNCH",
+                       "STDIO_MESSAGES" ],
+        "release_versions": ["2", "5"],
+        "default_lib": "small",
+        "device_name": "STM32F334K8"
+    },
 
     "REALTEK_RTL8195AM": {
         "supported_form_factors": ["ARDUINO"],
