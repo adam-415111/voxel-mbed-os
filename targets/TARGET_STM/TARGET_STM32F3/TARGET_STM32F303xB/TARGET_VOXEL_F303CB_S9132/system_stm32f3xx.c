@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    system_stm32f3xx.c
+  * @File    system_stm32f3xx.c
   * @author  MCD Application Team
   * @version V2.3.0
   * @date    29-April-2015
@@ -214,18 +214,6 @@ void SystemInit(void)
 #else
   SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal FLASH */
 #endif
-
-  /* Configure the Cube driver */
-  SystemCoreClock = 8000000; // At this stage the HSI is used as system clock
-  HAL_Init();
-
-  /* Configure the System clock source, PLL Multiplier and Divider factors,
-     AHB/APBx prescalers and Flash settings */
-  SetSysClock();
-
-  /* Reset the timer to avoid issues after the RAM initialization */
-  TIM_MST_RESET_ON;
-  TIM_MST_RESET_OFF;
 }
 
 /**
