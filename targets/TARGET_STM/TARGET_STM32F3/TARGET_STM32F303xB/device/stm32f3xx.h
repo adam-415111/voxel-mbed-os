@@ -151,7 +151,7 @@
 #elif defined(STM32F303x8)
   #include "stm32f303x8.h"
 #elif defined(STM32F303xB)
-  #include "stm32f303xc.h"
+  #include "stm32f303xb.h"
 #elif defined(STM32F303xC)
   #include "stm32f303xc.h"
 #elif defined(STM32F303xE)
