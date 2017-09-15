@@ -3272,10 +3272,10 @@
 
 
     "VOXEL_F303CB_USB2CAN": {
-        "inherits": ["Target"],
+        "inherits": ["FAMILY_STM32"],
         "core": "Cortex-M4F",
         "default_toolchain": "GCC_ARM",
-        "extra_labels": ["STM", "STM32F3", "STM32F303CB", "VOXEL_F303CB", "VOXEL_F303CB_USB2CAN"],
+        "extra_labels": ["STM", "STM32F3", "STM32F303xB"],
         "supported_toolchains": ["GCC_ARM"],
         "public": true,
         "detect_code": ["1704"],
@@ -3284,31 +3284,49 @@
                        "PORTIN", "PORTINOUT", "PORTOUT", "PWMOUT", "RTC",
                        "SERIAL", "SLEEP", "SPI", "SPISLAVE", "SPI_ASYNCH",
                        "STDIO_MESSAGES", "LOWPOWERTIMER" ],
-        "release_versions": ["2", "5"]
+        "release_versions": ["5"],
+        "device_name": "STM32F303K8"
     },
     "VOXEL_F303CB_S9132": {
-        "inherits": ["Target"],
+        "inherits": ["FAMILY_STM32"],
+        "supported_form_factors": ["ARDUINO"],
         "core": "Cortex-M4F",
         "default_toolchain": "GCC_ARM",
-        "extra_labels": ["STM", "STM32F3", "STM32F303CB", "VOXEL_F303CB", "VOXEL_F303CB_S9132"],
+        "extra_labels": ["STM", "STM32F3", "STM32F303xB" ],
         "supported_toolchains": ["GCC_ARM"],
+        "config": {
+            "clock_source": {
+                "help": "Mask value : USE_PLL_HSE_EXTC | USE_PLL_HSE_XTAL (need HW patch) | USE_PLL_HSI",
+                "value": "USE_PLL_HSI",
+                "macro_name": "CLOCK_SOURCE"
+            }
+        },
         "public": true,
         "detect_code": ["1704"],
         "macros": ["TRANSACTION_QUEUE_SIZE_SPI=2", "RCC_CFGR3_USART3SW"],
+        "default_lib": "small",
         "device_has": ["ANALOGIN", "ANALOGOUT", "CAN", "I2C", "INTERRUPTIN",
                        "PORTIN", "PORTINOUT", "PORTOUT", "PWMOUT", "RTC",
                        "SERIAL", "SLEEP", "SPI", "SPISLAVE", "SPI_ASYNCH",
                        "STDIO_MESSAGES", "LOWPOWERTIMER" ],
-        "release_versions": ["2", "5"]
+        "release_versions": ["2", "5"],
+        "device_name": "STM32F303K8"
     },
     "VOXEL_F334_US": {
-        "inherits": ["Target"],
+        "inherits": ["FAMILY_STM32"],
         "core": "Cortex-M4F",
         "default_toolchain": "GCC_ARM",
         "extra_labels": ["STM", "STM32F3", "STM32F334x8", "STM32F334K8", "VOXEL_F334_US"],
         "supported_toolchains": ["GCC_ARM"],
         "public": true,
         "detect_code": ["0735"],
+        "config": {
+            "clock_source": {
+                "help": "Mask value : USE_PLL_HSE_EXTC | USE_PLL_HSE_XTAL (need HW patch) | USE_PLL_HSI",
+                "value": "USE_PLL_HSI",
+                "macro_name": "CLOCK_SOURCE"
+            }
+        },
         "macros": ["TRANSACTION_QUEUE_SIZE_SPI=2" ],
         "device_has": ["ANALOGIN", "ANALOGOUT", "CAN", "I2C", "INTERRUPTIN",
                        "PORTIN", "PORTINOUT", "PORTOUT", "PWMOUT", "RTC",
@@ -3326,6 +3344,13 @@
         "supported_toolchains": ["GCC_ARM"],
         "public": true,
         "detect_code": ["0735"],
+        "config": {
+            "clock_source": {
+                "help": "Mask value : USE_PLL_HSE_EXTC | USE_PLL_HSE_XTAL (need HW patch) | USE_PLL_HSI",
+                "value": "USE_PLL_HSI",
+                "macro_name": "CLOCK_SOURCE"
+            }
+        },
         "macros": ["TRANSACTION_QUEUE_SIZE_SPI=2" ],
         "device_has": ["ANALOGIN", "ANALOGOUT", "CAN", "I2C", "INTERRUPTIN",
                        "PORTIN", "PORTINOUT", "PORTOUT", "PWMOUT", "RTC",
