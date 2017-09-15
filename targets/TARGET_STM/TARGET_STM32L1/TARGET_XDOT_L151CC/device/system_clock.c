@@ -41,7 +41,7 @@
 /*!< Uncomment the following line if you need to relocate your vector Table in
      Internal SRAM. */
 /* #define VECT_TAB_SRAM */
-#define VECT_TAB_OFFSET  0x0 /*!< Vector Table base offset field. 
+#define VECT_TAB_OFFSET  0x0 /*!< Vector Table base offset field.
                                   This value must be a multiple of 0x200. */
 
 /* Select the clock sources (other than HSI) to start with (0=OFF, 1=ON) */
@@ -91,7 +91,7 @@ void SystemInit (void)
 #if defined(__ICCARM__)
 #pragma section=".intvec"
 #define FLASH_VTOR_BASE   ((uint32_t)__section_begin(".intvec"))
-#elif defined(__CC_ARM)
+#elif defined(__CC_ARM) || (defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050))
     extern uint32_t Load$$LR$$LR_IROM1$$Base[];
 #define FLASH_VTOR_BASE   ((uint32_t)Load$$LR$$LR_IROM1$$Base)
 #elif defined(__GNUC__)
@@ -253,7 +253,9 @@ uint8_t SetSysClock_PLL_HSI(void)
 /******************************************************************************/
 void HardFault_Handler(void)
 {
+#if !defined(NDEBUG) || NDEBUG == 0
     printf("Hard Fault\n");
+#endif
     NVIC_SystemReset();
 }
 
